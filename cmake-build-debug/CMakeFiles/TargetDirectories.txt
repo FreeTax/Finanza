@@ -1,0 +1,3 @@
+/Users/francescomazzola/Project/Finanza/cmake-build-debug/CMakeFiles/Finanza.dir
+/Users/francescomazzola/Project/Finanza/cmake-build-debug/CMakeFiles/edit_cache.dir
+/Users/francescomazzola/Project/Finanza/cmake-build-debug/CMakeFiles/rebuild_cache.dir
