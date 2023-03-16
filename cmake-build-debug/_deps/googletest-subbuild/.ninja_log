@@ -1,0 +1,21 @@
+# ninja log v5
+0	41	1678987367965765838	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-mkdir	169b90a56382058d
+0	41	1678987367965765838	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-mkdir	169b90a56382058d
+0	3934	1678987373802367220	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download	c8f2735dfd32f1cf
+0	3934	1678987373802367220	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download	c8f2735dfd32f1cf
+3935	3998	1678987373866067124	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-update	823cccaecb4bdf3d
+3935	3998	1678987373866067124	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-update	823cccaecb4bdf3d
+3998	4054	1678987373922071006	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-patch	76923f034272265c
+3998	4054	1678987373922071006	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-patch	76923f034272265c
+4054	4109	1678987373977333555	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-configure	e4b892bfb233a697
+4054	4109	1678987373977333555	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-configure	e4b892bfb233a697
+4109	4164	1678987374032279593	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-build	e1c8d49adc3b4b61
+4109	4164	1678987374032279593	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-build	e1c8d49adc3b4b61
+4164	4221	1678987374088774039	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-install	20b12640c0235632
+4164	4221	1678987374088774039	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-install	20b12640c0235632
+4221	4276	1678987374144025037	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-test	20132b18a7bf7ba4
+4221	4276	1678987374144025037	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-test	20132b18a7bf7ba4
+4276	4354	1678987374221898000	CMakeFiles/googletest-populate-complete	82cdfd9fb4ba7097
+4276	4354	1678987374221898000	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-done	82cdfd9fb4ba7097
+4276	4354	1678987374221898000	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/CMakeFiles/googletest-populate-complete	82cdfd9fb4ba7097
+4276	4354	1678987374221898000	/Users/francescomazzola/Project/Finanza/cmake-build-debug/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-done	82cdfd9fb4ba7097

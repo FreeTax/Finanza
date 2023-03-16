@@ -22,7 +22,7 @@ void BankAccount::incrementBalance(float value) {
 }
 
 void BankAccount::decrementBalance(float value) {
-    balance -= value;
+    balance = balance - value;
 }
 
 void BankAccount::makeTransaction(BankAccount *receiver, float value) {
