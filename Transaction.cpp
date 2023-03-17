@@ -26,7 +26,7 @@ bool Transaction::makeTransaction() {
     if (isValid()) {
         sleep(random() % 10);
         sender->decrementBalance(value);
-        receiver->incrementBalance(value);
+        receiver->receiveTransaction(sender, value);
         return true;
     } else {
         return false;

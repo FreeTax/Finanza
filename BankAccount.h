@@ -3,14 +3,16 @@
 
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
-#include <unistd.h>
+#include <string>
+
+
 
 class BankAccount {
 private:
     int id;
     float balance;
 public:
-    BankAccount();
+    BankAccount(int id, float balance = 0.0);
 
     virtual ~BankAccount();
 
@@ -24,6 +26,9 @@ public:
 
     void makeTransaction(BankAccount *receiver, float value);
 
+    void receiveTransaction(BankAccount *sender, float value);
+
+    void saveToFile(std::string data);
 
 };
 #endif
