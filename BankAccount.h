@@ -12,7 +12,7 @@ private:
     int id;
     float balance;
 public:
-    BankAccount(int id, float balance = 0.0);
+    BankAccount(int id);
 
     virtual ~BankAccount();
 
