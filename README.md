@@ -1,7 +1,7 @@
 # Finanza
 Progetto realizzato per il corso "Laboratorio di Programmazione"
 ## Obbiettivo
-Realizzare delle classi che rappresentano transazioni finanziarie su un conto corrente (ingresso e uscita). Le classi devono essere in gradi leggere e salvare i dati su file. <\br >
+Realizzare delle classi che rappresentano transazioni finanziarie su un conto corrente (ingresso e uscita). Le classi devono essere in gradi leggere e salvare i dati su file. \
 Oltre a ciò è necessario implementare metodologie ti testing.
 
 ## Come è stato realizzato
@@ -12,11 +12,12 @@ Il progetto si articola in 3 classi principlai:
 oltre a ciò è stato inserito un main che simula l'interazione attraverso transazioni tra i vari utenti
 
 ## Testing 
-Per effettuare il testing è stato utilizzato il framework di Google [<b > Google Test </b >](https://github.com/google/googletest.git). <\br >
+Per effettuare il testing è stato utilizzato il framework di Google [<b > Google Test </b >](https://github.com/google/googletest.git). \
 Nello specifico è stata cerata una directory test con all'interno:
 - runAllTest che si occupa di lanciare tutti i test del progetto 
-- BanckAccountTest che contiene tutti i test della classe BanckAccount
-la scelta di creare un file cpp che si occupa di lanciare tutti i test nella directory permette una evoluzione futura del testing in maniera agile. 
+- BanckAccountTest che contiene tutti i test della classe BanckAccount.
+
+La scelta di creare un file cpp che si occupa di lanciare tutti i test nella directory permette una evoluzione futura del testing in maniera agile. 
 Infatti, qualora si aggiungano nuovi file cpp contenenti test essi verrano automaticamente eseguiti da runAllTest.
 
 ### Gestione degli indici degli utenti 
