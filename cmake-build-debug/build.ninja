@@ -90,6 +90,12 @@ build CMakeFiles/core.dir/BankAccount.cpp.o: CXX_COMPILER__core_Debug /Users/fra
   OBJECT_DIR = CMakeFiles/core.dir
   OBJECT_FILE_DIR = CMakeFiles/core.dir
 
+build CMakeFiles/core.dir/IOFile.cpp.o: CXX_COMPILER__core_Debug /Users/francescomazzola/Project/Finanza/IOFile.cpp || cmake_object_order_depends_target_core
+  DEP_FILE = CMakeFiles/core.dir/IOFile.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -fcolor-diagnostics -std=gnu++17
+  OBJECT_DIR = CMakeFiles/core.dir
+  OBJECT_FILE_DIR = CMakeFiles/core.dir
+
 
 # =============================================================================
 # Link build statements for STATIC_LIBRARY target core
@@ -98,7 +104,7 @@ build CMakeFiles/core.dir/BankAccount.cpp.o: CXX_COMPILER__core_Debug /Users/fra
 #############################################
 # Link the static library libcore.a
 
-build libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/Transaction.cpp.o CMakeFiles/core.dir/BankAccount.cpp.o
+build libcore.a: CXX_STATIC_LIBRARY_LINKER__core_Debug CMakeFiles/core.dir/Transaction.cpp.o CMakeFiles/core.dir/BankAccount.cpp.o CMakeFiles/core.dir/IOFile.cpp.o
   ARCH_FLAGS = -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0
   LANGUAGE_COMPILE_FLAGS = -g
   OBJECT_DIR = CMakeFiles/core.dir

@@ -3,7 +3,6 @@
 //
 
 #include "Transaction.h"
-#include "BankAccount.h"
 
 Transaction::Transaction(BankAccount *sender, BankAccount *receiver, float value) : sender(sender), receiver(receiver),
                                                                                     value(value) {}
@@ -32,5 +31,6 @@ bool Transaction::makeTransaction() {
         return false;
     }
 }
+
 
 

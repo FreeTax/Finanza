@@ -2,8 +2,6 @@
 // Created by Francesco Mazzola on 12/02/23.
 //
 
-#ifndef TRANSACTION_H
-#define TRANSACTION_H
 
 #include <unistd.h>
 #include <cstdlib>
@@ -14,6 +12,9 @@ class Transaction {
 
 public:
 //methods
+
+    Transaction(BankAccount sender, BankAccount *receiver, float value);
+
     Transaction(BankAccount *sender, BankAccount *receiver, float value);
 
     virtual ~Transaction();
@@ -27,4 +28,3 @@ private:
     BankAccount *receiver;
     float value;
 };
-#endif

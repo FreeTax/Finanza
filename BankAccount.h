@@ -4,13 +4,14 @@
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
 #include <string>
-
+#include "IOFile.h"
 
 
 class BankAccount {
 private:
     int id;
     float balance;
+    IOFile ioFile;
 public:
     BankAccount(int id);
 
@@ -28,9 +29,11 @@ public:
 
     void receiveTransaction(BankAccount *sender, float value);
 
-    void saveToFile(std::string data);
+    void printAccountBalanceAndTransactions();
+
 
 };
+
 #endif
 
 
