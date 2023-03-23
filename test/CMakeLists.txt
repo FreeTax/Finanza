@@ -4,6 +4,6 @@ add_subdirectory(./lib/googletest)
 set(gtest_SOURCE_DIR, ./lib/googletest/)
 include_directories(${gtest_SOURCE_DIR}/include ${gtest_SOURCE_DIR})
 
-set(TEST_SOURCE_FILES BanckAccountTest.cpp RunAllTest.cpp)
+set(TEST_SOURCE_FILES BanckAccountTest.cpp RunAllTest.cpp IOFileTest.cpp)
 add_executable(runFinanzaTest ${TEST_SOURCE_FILES})
 target_link_libraries(runFinanzaTest gtest gtest_main core)

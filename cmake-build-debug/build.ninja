@@ -164,6 +164,13 @@ build test/CMakeFiles/runFinanzaTest.dir/RunAllTest.cpp.o: CXX_COMPILER__runFina
   OBJECT_DIR = test/CMakeFiles/runFinanzaTest.dir
   OBJECT_FILE_DIR = test/CMakeFiles/runFinanzaTest.dir
 
+build test/CMakeFiles/runFinanzaTest.dir/IOFileTest.cpp.o: CXX_COMPILER__runFinanzaTest_Debug /Users/francescomazzola/Project/Finanza/test/IOFileTest.cpp || cmake_object_order_depends_target_runFinanzaTest
+  DEP_FILE = test/CMakeFiles/runFinanzaTest.dir/IOFileTest.cpp.o.d
+  FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0 -fcolor-diagnostics -std=gnu++17
+  INCLUDES = -I/Users/francescomazzola/Project/Finanza/test/lib/googletest -isystem /Users/francescomazzola/Project/Finanza/test/lib/googletest/include
+  OBJECT_DIR = test/CMakeFiles/runFinanzaTest.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/runFinanzaTest.dir
+
 
 # =============================================================================
 # Link build statements for EXECUTABLE target runFinanzaTest
@@ -172,7 +179,7 @@ build test/CMakeFiles/runFinanzaTest.dir/RunAllTest.cpp.o: CXX_COMPILER__runFina
 #############################################
 # Link the executable test/runFinanzaTest
 
-build test/runFinanzaTest: CXX_EXECUTABLE_LINKER__runFinanzaTest_Debug test/CMakeFiles/runFinanzaTest.dir/BanckAccountTest.cpp.o test/CMakeFiles/runFinanzaTest.dir/RunAllTest.cpp.o | test/lib/googletest/libgtestd.a test/lib/googletest/libgtest_maind.a libcore.a test/lib/googletest/libgtestd.a || libcore.a test/lib/googletest/libgtest_maind.a test/lib/googletest/libgtestd.a
+build test/runFinanzaTest: CXX_EXECUTABLE_LINKER__runFinanzaTest_Debug test/CMakeFiles/runFinanzaTest.dir/BanckAccountTest.cpp.o test/CMakeFiles/runFinanzaTest.dir/RunAllTest.cpp.o test/CMakeFiles/runFinanzaTest.dir/IOFileTest.cpp.o | test/lib/googletest/libgtestd.a test/lib/googletest/libgtest_maind.a libcore.a test/lib/googletest/libgtestd.a || libcore.a test/lib/googletest/libgtest_maind.a test/lib/googletest/libgtestd.a
   FLAGS = -g -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX13.1.sdk -mmacosx-version-min=13.0
   LINK_LIBRARIES = test/lib/googletest/libgtestd.a  test/lib/googletest/libgtest_maind.a  libcore.a  test/lib/googletest/libgtestd.a
   OBJECT_DIR = test/CMakeFiles/runFinanzaTest.dir

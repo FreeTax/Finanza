@@ -26,10 +26,12 @@ int BankAccount::getId() {
 
 void BankAccount::incrementBalance(float value) {
     balance += value;
+    ioFile.saveToFile("balance incremented with value: "+std::to_string(value)+" and balance: "+std::to_string(balance));
 }
 
 void BankAccount::decrementBalance(float value) {
     balance = balance - value;
+    ioFile.saveToFile("balance decremented with value: "+std::to_string(value)+" and balance: "+std::to_string(balance));
 }
 
 void BankAccount::makeTransaction(BankAccount *receiver, float value) {
