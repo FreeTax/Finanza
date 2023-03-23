@@ -16,6 +16,7 @@ Per effettuare il testing è stato utilizzato il framework di Google [<b > Googl
 Nello specifico è stata cerata una directory test con all'interno:
 - runAllTest che si occupa di lanciare tutti i test del progetto 
 - BanckAccountTest che contiene tutti i test della classe BanckAccount.
+- IOFileTest che contiene i test relativi alla classe IOFile
 
 La scelta di creare un file cpp che si occupa di lanciare tutti i test nella directory permette una evoluzione futura del testing in maniera agile. 
 Infatti, qualora si aggiungano nuovi file cpp contenenti test essi verrano automaticamente eseguiti da runAllTest.
