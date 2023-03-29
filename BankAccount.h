@@ -4,36 +4,49 @@
 #ifndef BANKACCOUNT_H
 #define BANKACCOUNT_H
 #include <string>
-#include "IOFile.h"
-
+#include <list>
+#include "Transaction.h"
 
 class BankAccount {
+
 private:
+    std::list<Transaction> transactions;
+
     int id;
     float balance;
-    IOFile ioFile;
+
+    std::string filename;
 public:
     BankAccount(int id);
 
     virtual ~BankAccount();
 
-    float getBalance();
+    const float getBalance();
 
-    int getId();
+    const std::list<Transaction> &getTransactions() const;
+
+    const int getId();
 
     void incrementBalance(float value);
 
     void decrementBalance(float value);
 
-    void makeTransaction(BankAccount *receiver, float value);
+    void makeTransaction(BankAccount *receiver, float value, std::string description, std::string data);
 
-    void receiveTransaction(BankAccount *sender, float value);
+    void receiveTransaction(BankAccount *sender, float value, Transaction transaction);
 
     void printAccountBalanceAndTransactions();
 
+    void insertTransaction(Transaction transaction);
 
+    void addTransaction(Transaction transaction);
+
+    void loadTransactionsFromFile();
+
+    void removeTransaction(Transaction transaction);
+
+    void removeBalance(Transaction transaction);
+
+    void editBalanceInFile();
 };
-
 #endif
-
-

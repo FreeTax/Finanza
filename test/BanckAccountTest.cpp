@@ -6,45 +6,53 @@
 #include "gtest/gtest.h"
 #include <stdio.h>
 
-TEST(BankAccount, incrementBalance){ //test for testing the incrementBalance method
-    BankAccount *b;
-    b=new BankAccount(-1);
-    b->incrementBalance(105.8);
-    EXPECT_FLOAT_EQ(b->getBalance(), 105.8); //for float comparison use EXPECT_FLOAT_EQ because EXPECT_EQ dosent work
-    remove("-1.txt"); //remove the file if it exists
-
-}
-TEST(BankAccount, decrementBalance){ //test for testing the decrementBalance method
-    BankAccount *b;
-    b=new BankAccount(-1);
-    b->incrementBalance(105.8);
-    b->decrementBalance(105.8);
-    EXPECT_FLOAT_EQ(b->getBalance(), 0);
-    remove("-1.txt"); //remove the file if it exists
+TEST(BankAccountTest, testGetBalance) {
+    BankAccount bankAccount(-1);
+    EXPECT_EQ(0, bankAccount.getBalance());
+    remove("-1.txt");
 }
 
-TEST(BankAccount, makeTransaction){ //test for testing the transaction method
-    BankAccount *b1;
-    BankAccount *b2;
-    b1=new BankAccount(-1);
-    b2=new BankAccount(-2);
-    b1->incrementBalance(105.8);
-    b1->makeTransaction(b2, 105.8);
-    EXPECT_FLOAT_EQ(b1->getBalance(), 0);
-    EXPECT_FLOAT_EQ(b2->getBalance(), 105.8);
-    remove("-1.txt"); //remove the file if it exists
-    remove("-2.txt"); //remove the file if it exists
+TEST(BankAccountTest, testGetId) {
+    BankAccount bankAccount(-1);
+    EXPECT_EQ(-1, bankAccount.getId());
+    remove("-1.txt");
 }
 
-TEST(BankAccount, receiveTransaction){ //test for testing the receiveTransaction method
-    BankAccount *b1;
-    BankAccount *b2;
-    b1=new BankAccount(-1);
-    b2=new BankAccount(-2);
-    b1->incrementBalance(105.8);
-    b1->makeTransaction(b2, 105.8);
-    EXPECT_FLOAT_EQ(b1->getBalance(), 0);
-    EXPECT_FLOAT_EQ(b2->getBalance(), 105.8);
-    remove("-1.txt"); //remove the file if it exists
-    remove("-2.txt"); //remove the file if it exists
+TEST(BankAccountTest, testIncrementBalance) {
+    BankAccount bankAccount(-1);
+    bankAccount.incrementBalance(10);
+    EXPECT_EQ(10, bankAccount.getBalance());
+    remove("-1.txt");
+}
+
+TEST(BankAccountTest, testDecrementBalance) {
+    BankAccount bankAccount(-1);
+    bankAccount.incrementBalance(10);
+    bankAccount.decrementBalance(5);
+    EXPECT_EQ(5, bankAccount.getBalance());
+    remove("-1.txt");
+}
+
+TEST(BankAccountTest, testMakeTransaction) {
+    BankAccount bankAccount1(-1);
+    BankAccount bankAccount2(-2);
+    bankAccount1.incrementBalance(10);
+    bankAccount1.makeTransaction(&bankAccount2, 5, "test", "13/02/2021");
+    EXPECT_EQ(5, bankAccount1.getBalance());
+    EXPECT_EQ(5, bankAccount2.getBalance());
+    remove("-1.txt");
+    remove("-2.txt");
+}
+
+TEST(BankAccountTest, removeTransaction){
+    BankAccount bankAccount1(-1);
+    BankAccount bankAccount2(-2);
+    bankAccount1.incrementBalance(10);
+    bankAccount1.makeTransaction(&bankAccount2, 5, "test", "13/02/2021");
+    bankAccount1.removeTransaction(*new Transaction(std::to_string(-1), std::to_string(-2), 5, "test", "13/02/2021"));
+    EXPECT_EQ(10, bankAccount1.getBalance());
+    EXPECT_EQ(0, bankAccount2.getBalance());
+    EXPECT_EQ(0, bankAccount1.getTransactions().size());
+    remove("-1.txt");
+    remove("-2.txt");
 }
