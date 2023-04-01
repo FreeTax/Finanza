@@ -4,6 +4,7 @@
 
 #include "Transaction.h"
 
+
 Transaction::Transaction(const std::string &sender, const std::string &receiver, float value,
                          const std::string &description, const std::string &data) : sender(sender), receiver(receiver),
                                                                                     value(value),
@@ -12,15 +13,6 @@ Transaction::Transaction(const std::string &sender, const std::string &receiver,
 
 Transaction::~Transaction() {
 
-}
-
-Transaction::Transaction() {}
-
-std::string Transaction::toString() {
-    std::string transactionString;
-    transactionString = "Sender: " + sender + " Receiver: " + receiver + " Value: " + std::to_string(value) +
-                        " Description: " + description + " Data: " + data;
-    return transactionString;
 }
 
 const std::string &Transaction::getSender() const {
@@ -62,6 +54,8 @@ const std::string &Transaction::getData() const {
 void Transaction::setData(const std::string &data) {
     Transaction::data = data;
 }
+
+Transaction::Transaction() {}
 
 bool Transaction::operator==(const Transaction &rhs) const {
     return sender == rhs.sender &&

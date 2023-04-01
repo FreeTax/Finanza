@@ -19,6 +19,10 @@ public:
 
     virtual ~Transaction();
 
+    bool operator==(const Transaction &rhs) const;
+
+    bool operator!=(const Transaction &rhs) const;
+
     const std::string &getSender() const;
 
     void setSender(const std::string &sender);
@@ -39,11 +43,8 @@ public:
 
     void setData(const std::string &data);
 
-    std::string toString();
 
-    bool operator==(const Transaction &rhs) const;
 
-    bool operator!=(const Transaction &rhs) const;
 
 
 private:

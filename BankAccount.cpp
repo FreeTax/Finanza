@@ -54,27 +54,16 @@ void BankAccount::decrementBalance(float value) {
     editBalanceInFile();
 }
 
-void BankAccount::makeTransaction(BankAccount *receiver, float value, std::string description, std::string data) {
-    if (balance >= value) {
-        balance -= value;
-        Transaction transaction(std::to_string(id), std::to_string(receiver->getId()), value, description, data);
-        receiver->receiveTransaction(this, value, transaction);
-        addTransaction(transaction);
-        std::string dataString="transaction made to the user: "+std::to_string(receiver->getId())+" with value: "+std::to_string(value)+" and balance: "+std::to_string(balance);
-    } else {
-        std::cout << "Not enough money" << std::endl;
-    }
-}
-
-void BankAccount::addTransaction(Transaction transaction) {
+void BankAccount::insertTransaction(Transaction transaction) {
     transactions.push_back(transaction);
-    insertTransaction(transaction);
-}
-
-void BankAccount::receiveTransaction(BankAccount *sender, float value, Transaction transaction) {
-    balance += value;
-    addTransaction(transaction);
-    std::string dataString="transaction received from the user: "+std::to_string(sender->getId())+" with value: "+std::to_string(value)+" and balance: "+std::to_string(balance);
+    insertTransactionInFile(transaction);
+    if(transaction.getSender()==std::to_string(id)){
+        decrementBalance(transaction.getValue());
+    }else if(transaction.getReceiver()==std::to_string(id)){
+        incrementBalance(transaction.getValue());
+    }else{
+        std::cout<<"Error: transaction not valid"<<std::endl;
+    }
 }
 
 void BankAccount::printAccountBalanceAndTransactions() {
@@ -91,7 +80,7 @@ void BankAccount::printAccountBalanceAndTransactions() {
     }
 }
 
-void BankAccount::insertTransaction(Transaction transaction) {
+void BankAccount::insertTransactionInFile(Transaction transaction) {
     //function that insert transaction inside txt file
     std::ofstream file;
     file.open(filename, std::ios_base::app);
@@ -148,7 +137,19 @@ void BankAccount::loadTransactionsFromFile() {
 
 }
 
-void BankAccount::removeTransaction(Transaction transaction) {
+bool BankAccount::removeTransactionFromTransactions(Transaction transaction) {
+    try{
+        transactions.remove(transaction);
+        decrementBalance(transaction.getValue());
+        return true;
+    }
+    catch(...){
+        std::cout<<"transaction not found"<<std::endl;
+        return false;
+    }
+}
+
+void BankAccount::removeTransactionFromFle(Transaction transaction) {
     std::ifstream file;
     std::ofstream out("outfile.txt");
     file.open(filename);
@@ -202,37 +203,9 @@ void BankAccount::removeTransaction(Transaction transaction) {
             out<<data<<std::endl;
             out<<line_f<<std::endl;
         }
-        else{
-            sender=sender.substr(6);
-            receiver=receiver.substr(4);
-            value=value.substr(7);
-            description=description.substr(13);
-            data=data.substr(6);
-            Transaction transaction= *new Transaction(sender, receiver, std::stof(value), description, data);
-            try {
-                transactions.remove(transaction);
-                removeBalance(transaction);
-            } catch (std::exception e) {
-                std::cout<<"error"<<std::endl;
-                std::cout<<e.what()<<std::endl;
-            }
-        }
     }
     remove(filename.c_str());
     rename("outfile.txt", filename.c_str());
-}
-
-void BankAccount::removeBalance(Transaction transaction) {
-    if(transaction.getSender().find(id)!=std::string::npos){ //case that i am the sender: i increment my balance and decrement the receiver balance
-        balance+=transaction.getValue();
-        BankAccount *receiver= new BankAccount(std::stoi(transaction.getReceiver()));
-        receiver->decrementBalance(transaction.getValue());
-    }
-    else{ //case that i am the receiver: i decrement my balance and increment the sender balance
-        balance-=transaction.getValue();
-        BankAccount *sender= new BankAccount(std::stoi(transaction.getSender()));
-        sender->incrementBalance(transaction.getValue());
-    }
 }
 
 void BankAccount::editBalanceInFile() {
@@ -254,4 +227,17 @@ const std::list<Transaction> &BankAccount::getTransactions() const {
     return transactions;
 }
 
+bool BankAccount::removeTransaction(Transaction transaction) {
+    bool esit=removeTransactionFromTransactions(transaction);
+    removeTransactionFromFle(transaction);
+    return esit;
+}
 
+void BankAccount::editTransaction(Transaction transaction, Transaction newTransaction) {
+    if(removeTransaction(transaction)) {
+        insertTransaction(newTransaction);
+    }
+    else{
+        std::cout<<"transaction not found"<<std::endl;
+    }
+}

@@ -7,15 +7,26 @@
 #include <list>
 #include "Transaction.h"
 
+class Transaction;
+
 class BankAccount {
 
 private:
     std::list<Transaction> transactions;
-
     int id;
     float balance;
-
     std::string filename;
+
+    void loadTransactionsFromFile();
+
+    void removeTransactionFromFle(Transaction transaction);
+
+    bool removeTransactionFromTransactions(Transaction transaction);
+
+    void editBalanceInFile();
+
+    void insertTransactionInFile(Transaction transaction);
+
 public:
     BankAccount(int id);
 
@@ -31,22 +42,12 @@ public:
 
     void decrementBalance(float value);
 
-    void makeTransaction(BankAccount *receiver, float value, std::string description, std::string data);
-
-    void receiveTransaction(BankAccount *sender, float value, Transaction transaction);
-
     void printAccountBalanceAndTransactions();
+
+    bool removeTransaction(Transaction transaction);
 
     void insertTransaction(Transaction transaction);
 
-    void addTransaction(Transaction transaction);
-
-    void loadTransactionsFromFile();
-
-    void removeTransaction(Transaction transaction);
-
-    void removeBalance(Transaction transaction);
-
-    void editBalanceInFile();
+    void editTransaction(Transaction transaction, Transaction newTransaction);
 };
 #endif
