@@ -19,24 +19,22 @@ private:
 
     void loadTransactionsFromFile();
 
-    void removeTransactionFromFle(Transaction transaction);
+    void removeTransactionFromFile(Transaction& transaction);
 
-    bool removeTransactionFromTransactions(Transaction transaction);
+    bool removeTransactionFromTransactions(Transaction& transaction);
 
     void editBalanceInFile();
 
-    void insertTransactionInFile(Transaction transaction);
+    void insertTransactionInFile(Transaction& transaction);
 
 public:
     BankAccount(int id);
 
-    virtual ~BankAccount();
+    float getBalance() const;
 
-    const float getBalance();
+    std::list<Transaction> &getTransactions();
 
-    const std::list<Transaction> &getTransactions() const;
-
-    const int getId();
+    int getId() const;
 
     void incrementBalance(float value);
 
@@ -44,10 +42,10 @@ public:
 
     void printAccountBalanceAndTransactions();
 
-    bool removeTransaction(Transaction transaction);
+    bool removeTransaction(Transaction& transaction);
 
-    void insertTransaction(Transaction transaction);
+    void insertTransaction(Transaction& transaction);
 
-    void editTransaction(Transaction transaction, Transaction newTransaction);
+    bool editTransaction(Transaction& transaction, Transaction& newTransaction);
 };
 #endif

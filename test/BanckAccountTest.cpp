@@ -71,3 +71,20 @@ TEST(BankAccountTest, testEditTransaction) {
     EXPECT_EQ(10, bankAccount.getTransactions().front().getValue());
     remove("-1.txt");
 }
+
+TEST(BankAccountTest, testRemoveTransactionReturnFalse) {
+    remove("-1.txt");
+    BankAccount bankAccount(-1);
+    Transaction transaction("sender", "receiver", 10, "description", "date");
+    EXPECT_FALSE(bankAccount.removeTransaction(transaction));
+    remove("-1.txt");
+}
+
+TEST(BankAccountTest, testEditTransactionReturnFalse) {
+    remove("-1.txt");
+    BankAccount bankAccount(-1);
+    Transaction transaction("sender", "receiver", 10, "description", "date");
+    Transaction newTransaction("sender1", "receiver2", 10, "description", "date");
+    EXPECT_FALSE(bankAccount.editTransaction(transaction, newTransaction));
+    remove("-1.txt");
+}

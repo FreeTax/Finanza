@@ -6,16 +6,15 @@
 #include <fstream>
 
 
-
-BankAccount::BankAccount(int id) : id(id){
+BankAccount::BankAccount(int id) : id(id) {
     //check if the file exists
     //if it exists, load the balance from the file
     //else create the file and set the balance to 0
-    balance=0;
+    balance = 0;
     filename = std::to_string(id);
     filename = filename + ".txt";
     std::ifstream file(filename);
-    if(file.good()) {
+    if (file.good()) {
         std::string line;
         while (std::getline(file, line)) {
             if (line.find("balance: ") != std::string::npos) {
@@ -26,21 +25,19 @@ BankAccount::BankAccount(int id) : id(id){
         }
         file.close();
         loadTransactionsFromFile();
-    } else{
+    } else {
         std::ofstream file(filename);
         file << "Account created with id: " << id << " and balance: " << balance << std::endl;
-        file<<"transactions"<<std::endl;
+        file << "transactions" << std::endl;
         file.close();
     }
 }
 
-BankAccount::~BankAccount() {}
-
-const float BankAccount::getBalance() {
+float BankAccount::getBalance() const {
     return balance;
 }
 
-const int BankAccount::getId() {
+int BankAccount::getId() const {
     return id;
 }
 
@@ -54,15 +51,15 @@ void BankAccount::decrementBalance(float value) {
     editBalanceInFile();
 }
 
-void BankAccount::insertTransaction(Transaction transaction) {
+void BankAccount::insertTransaction(Transaction &transaction) {
     transactions.push_back(transaction);
     insertTransactionInFile(transaction);
-    if(transaction.getSender()==std::to_string(id)){
+    if (transaction.getSender() == std::to_string(id)) {
         decrementBalance(transaction.getValue());
-    }else if(transaction.getReceiver()==std::to_string(id)){
+    } else if (transaction.getReceiver() == std::to_string(id)) {
         incrementBalance(transaction.getValue());
-    }else{
-        std::cout<<"Error: transaction not valid"<<std::endl;
+    } else {
+        std::cout << "Error: transaction not valid" << std::endl;
     }
 }
 
@@ -70,7 +67,7 @@ void BankAccount::printAccountBalanceAndTransactions() {
     std::cout << "Account id: " << id << std::endl;
     std::cout << "Balance: " << balance << std::endl;
     std::cout << "Transactions: " << std::endl;
-    for (Transaction transaction : transactions) {
+    for (Transaction transaction: transactions) {
         std::cout << "Sender: " << transaction.getSender() << std::endl;
         std::cout << "Receiver: " << transaction.getReceiver() << std::endl;
         std::cout << "Value: " << transaction.getValue() << std::endl;
@@ -80,17 +77,17 @@ void BankAccount::printAccountBalanceAndTransactions() {
     }
 }
 
-void BankAccount::insertTransactionInFile(Transaction transaction) {
+void BankAccount::insertTransactionInFile(Transaction &transaction) {
     //function that insert transaction inside txt file
     std::ofstream file;
     file.open(filename, std::ios_base::app);
-    file<< "{"<<std::endl;
-    file<<"from: "<<transaction.getSender()<<std::endl;
-    file<<"to: "<<transaction.getReceiver()<<std::endl;
-    file<<"value: "<<std::to_string(transaction.getValue())<<std::endl;
-    file<<"description: "<<transaction.getDescription()<<std::endl;
-    file<<"data: "<<transaction.getData()<<std::endl;
-    file<<"}"<<std::endl;
+    file << "{" << std::endl;
+    file << "from: " << transaction.getSender() << std::endl;
+    file << "to: " << transaction.getReceiver() << std::endl;
+    file << "value: " << std::to_string(transaction.getValue()) << std::endl;
+    file << "description: " << transaction.getDescription() << std::endl;
+    file << "data: " << transaction.getData() << std::endl;
+    file << "}" << std::endl;
     file.close();
 }
 
@@ -99,35 +96,35 @@ void BankAccount::loadTransactionsFromFile() {
     file.open(filename);
     std::string line;
     while (std::getline(file, line)) {
-        if(line.find("{")!=std::string::npos){
-            Transaction transaction= *new Transaction();
+        if (line.find("{") != std::string::npos) {
+            Transaction transaction = *new Transaction();
             while (std::getline(file, line)) {
-                if(line.find("from: ")!=std::string::npos){
+                if (line.find("from: ") != std::string::npos) {
                     int index = line.find("from: ");
                     std::string fromString = line.substr(index + 6);
                     transaction.setSender(fromString);
                 }
-                if(line.find("to: ")!=std::string::npos){
+                if (line.find("to: ") != std::string::npos) {
                     int index = line.find("to: ");
                     std::string toString = line.substr(index + 4);
                     transaction.setReceiver(toString);
                 }
-                if(line.find("value: ")!=std::string::npos){
+                if (line.find("value: ") != std::string::npos) {
                     int index = line.find("value: ");
                     std::string valueString = line.substr(index + 7);
                     transaction.setValue(std::stof(valueString));
                 }
-                if(line.find("description: ")!=std::string::npos){
+                if (line.find("description: ") != std::string::npos) {
                     int index = line.find("description: ");
                     std::string descriptionString = line.substr(index + 13);
                     transaction.setDescription(descriptionString);
                 }
-                if(line.find("data: ")!=std::string::npos){
+                if (line.find("data: ") != std::string::npos) {
                     int index = line.find("data: ");
                     std::string dataString = line.substr(index + 6);
                     transaction.setData(dataString);
                 }
-                if(line.find("}")!=std::string::npos){
+                if (line.find("}") != std::string::npos) {
                     transactions.push_back(transaction);
                     break;
                 }
@@ -137,19 +134,19 @@ void BankAccount::loadTransactionsFromFile() {
 
 }
 
-bool BankAccount::removeTransactionFromTransactions(Transaction transaction) {
-    try{
-        transactions.remove(transaction);
+bool BankAccount::removeTransactionFromTransactions(Transaction &transaction) {
+    int oldSize = transactions.size();
+    transactions.remove(transaction);
+    if (oldSize == transactions.size()) {
+        return false;
+    }
+    else {
         decrementBalance(transaction.getValue());
         return true;
     }
-    catch(...){
-        std::cout<<"transaction not found"<<std::endl;
-        return false;
-    }
 }
 
-void BankAccount::removeTransactionFromFle(Transaction transaction) {
+void BankAccount::removeTransactionFromFile(Transaction &transaction) {
     std::ifstream file;
     std::ofstream out("outfile.txt");
     file.open(filename);
@@ -162,18 +159,18 @@ void BankAccount::removeTransactionFromFle(Transaction transaction) {
     std::string data;
     std::string line_f;
 
-    bool copy= false;
+    bool copy = false;
 
     //copy intestation of file in outfile
     std::getline(file, line); //first row
-    out<<line<<std::endl;
+    out << line << std::endl;
 
     std::getline(file, line); //second row
-    out<<line<<std::endl;
+    out << line << std::endl;
 
     //copy all transaction except the one to delete
-    while(std::getline(file,line)){
-        copy=true;
+    while (std::getline(file, line)) {
+        copy = true;
 
         std::getline(file, sender);
         std::getline(file, receiver);
@@ -182,26 +179,26 @@ void BankAccount::removeTransactionFromFle(Transaction transaction) {
         std::getline(file, data);
         std::getline(file, line_f);
 
-        if(sender.find(transaction.getSender())!=std::string::npos){
-            if(receiver.find(transaction.getReceiver())!=std::string::npos){
-                if(value.find(std::to_string(transaction.getValue()))!=std::string::npos){
-                    if(description.find(transaction.getDescription())!=std::string::npos){
-                        if(data.find(transaction.getData())!=std::string::npos){
-                            copy=false;
+        if (sender.find(transaction.getSender()) != std::string::npos) {
+            if (receiver.find(transaction.getReceiver()) != std::string::npos) {
+                if (value.find(std::to_string(transaction.getValue())) != std::string::npos) {
+                    if (description.find(transaction.getDescription()) != std::string::npos) {
+                        if (data.find(transaction.getData()) != std::string::npos) {
+                            copy = false;
                         }
                     }
                 }
             }
         }
 
-        if(copy){
-            out<<line<<std::endl;
-            out<<sender<<std::endl;
-            out<<receiver<<std::endl;
-            out<<value<<std::endl;
-            out<<description<<std::endl;
-            out<<data<<std::endl;
-            out<<line_f<<std::endl;
+        if (copy) {
+            out << line << std::endl;
+            out << sender << std::endl;
+            out << receiver << std::endl;
+            out << value << std::endl;
+            out << description << std::endl;
+            out << data << std::endl;
+            out << line_f << std::endl;
         }
     }
     remove(filename.c_str());
@@ -213,7 +210,7 @@ void BankAccount::editBalanceInFile() {
     std::ofstream temp("temp.txt");
     std::string line;
     std::getline(file, line);
-    temp <<"Account created with id: "<<id  <<" and balance: "<<balance<< std::endl;
+    temp << "Account created with id: " << id << " and balance: " << balance << std::endl;
     while (std::getline(file, line)) {
         temp << line << std::endl;
     }
@@ -223,21 +220,21 @@ void BankAccount::editBalanceInFile() {
     rename("temp.txt", filename.c_str());
 }
 
-const std::list<Transaction> &BankAccount::getTransactions() const {
+std::list<Transaction> &BankAccount::getTransactions() {
     return transactions;
 }
 
-bool BankAccount::removeTransaction(Transaction transaction) {
-    bool esit=removeTransactionFromTransactions(transaction);
-    removeTransactionFromFle(transaction);
+bool BankAccount::removeTransaction(Transaction &transaction) {
+    bool esit = removeTransactionFromTransactions(transaction);
+    removeTransactionFromFile(transaction);
     return esit;
 }
 
-void BankAccount::editTransaction(Transaction transaction, Transaction newTransaction) {
-    if(removeTransaction(transaction)) {
+bool BankAccount::editTransaction(Transaction &transaction, Transaction &newTransaction) {
+    if (removeTransaction(transaction)) {
         insertTransaction(newTransaction);
-    }
-    else{
-        std::cout<<"transaction not found"<<std::endl;
+        return true;
+    } else {
+        return false;
     }
 }
