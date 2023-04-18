@@ -7,9 +7,6 @@
 
 
 BankAccount::BankAccount(int id) : id(id) {
-    //check if the file exists
-    //if it exists, load the balance from the file
-    //else create the file and set the balance to 0
     balance = 0;
     filename = std::to_string(id);
     filename = filename + ".txt";
@@ -51,7 +48,7 @@ void BankAccount::decrementBalance(float value) {
     editBalanceInFile();
 }
 
-void BankAccount::insertTransaction(Transaction &transaction) {
+void BankAccount::insertTransaction(const Transaction &transaction) {
     transactions.push_back(transaction);
     insertTransactionInFile(transaction);
     if (transaction.getSender() == std::to_string(id)) {
@@ -77,7 +74,7 @@ void BankAccount::printAccountBalanceAndTransactions() {
     }
 }
 
-void BankAccount::insertTransactionInFile(Transaction &transaction) {
+void BankAccount::insertTransactionInFile(const Transaction &transaction) {
     //function that insert transaction inside txt file
     std::ofstream file;
     file.open(filename, std::ios_base::app);
@@ -134,7 +131,7 @@ void BankAccount::loadTransactionsFromFile() {
 
 }
 
-bool BankAccount::removeTransactionFromTransactions(Transaction &transaction) {
+bool BankAccount::removeTransactionFromTransactions(const Transaction &transaction) {
     int oldSize = transactions.size();
     transactions.remove(transaction);
     if (oldSize == transactions.size()) {
@@ -146,7 +143,7 @@ bool BankAccount::removeTransactionFromTransactions(Transaction &transaction) {
     }
 }
 
-void BankAccount::removeTransactionFromFile(Transaction &transaction) {
+void BankAccount::removeTransactionFromFile(const Transaction &transaction) {
     std::ifstream file;
     std::ofstream out("outfile.txt");
     file.open(filename);
@@ -224,13 +221,13 @@ std::list<Transaction> &BankAccount::getTransactions() {
     return transactions;
 }
 
-bool BankAccount::removeTransaction(Transaction &transaction) {
+bool BankAccount::removeTransaction(const Transaction &transaction) {
     bool esit = removeTransactionFromTransactions(transaction);
     removeTransactionFromFile(transaction);
     return esit;
 }
 
-bool BankAccount::editTransaction(Transaction &transaction, Transaction &newTransaction) {
+bool BankAccount::editTransaction(const Transaction &transaction,const Transaction &newTransaction) {
     if (removeTransaction(transaction)) {
         insertTransaction(newTransaction);
         return true;

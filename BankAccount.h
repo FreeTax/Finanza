@@ -19,13 +19,13 @@ private:
 
     void loadTransactionsFromFile();
 
-    void removeTransactionFromFile(Transaction& transaction);
+    void removeTransactionFromFile(const Transaction& transaction);
 
-    bool removeTransactionFromTransactions(Transaction& transaction);
+    bool removeTransactionFromTransactions(const Transaction& transaction);
 
     void editBalanceInFile();
 
-    void insertTransactionInFile(Transaction& transaction);
+    void insertTransactionInFile(const Transaction& transaction);
 
 public:
     BankAccount(int id);
@@ -42,10 +42,10 @@ public:
 
     void printAccountBalanceAndTransactions();
 
-    bool removeTransaction(Transaction& transaction);
+    bool removeTransaction(const Transaction& transaction);
 
-    void insertTransaction(Transaction& transaction);
+    void insertTransaction(const Transaction& transaction);
 
-    bool editTransaction(Transaction& transaction, Transaction& newTransaction);
+    bool editTransaction(const Transaction& transaction,const Transaction& newTransaction);
 };
 #endif
